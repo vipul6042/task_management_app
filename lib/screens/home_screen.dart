@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task_management_app/screens/all_tasks.dart';
 import 'package:task_management_app/utils/app_colors.dart';
 import 'package:task_management_app/widgets/button_widgets.dart';
+
+import 'package:task_management_app/screens/add_task.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         width: double.maxFinite,
         height: double.maxFinite,
-        padding: const EdgeInsets.only(left:20,top: 70),
+        padding: const EdgeInsets.only(left:20,right: 20),
         decoration: const BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
@@ -27,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RichText(
@@ -49,8 +53,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 ]
               ),
             ),
-            const ButtonWidget(text: "Add Task", textColor: Colors.white, bgColor: AppColors.mainColor),
-            const ButtonWidget(text: "View All", textColor: AppColors.mainColor, bgColor: Colors.white)
+            SizedBox(height: MediaQuery.of(context).size.height/2,),
+            InkWell(
+              onTap: (){
+                Get.to(()=>const AddTask(),transition: Transition.zoom,duration: const Duration(seconds: 1));
+              },
+              child: const ButtonWidget(text: "Add Task", textColor: Colors.white, bgColor: AppColors.mainColor),
+            ),
+
+            const SizedBox(height: 20,),
+            InkWell(
+              onTap: (){
+                Get.to(()=>const AllTasks(),transition: Transition.fade,duration: const Duration(seconds: 1));
+              },
+                child: const ButtonWidget(text: "View All", textColor: AppColors.mainColor, bgColor: Colors.white))
           ],
         ),
       ),
